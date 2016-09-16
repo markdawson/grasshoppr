@@ -35,3 +35,4 @@ accounts-password
 zimme:active-route
 gwendall:auth-client-callbacks
 meteortoys:allthings
+arillo:flow-router-helpers

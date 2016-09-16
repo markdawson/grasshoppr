@@ -2,7 +2,6 @@
 	<main>
 		{{> navbar }}
 			<body>
-				<div class="container">
           {{#if currentUser}} 
 					 {{> Template.dynamic template=content}}
           {{else}}
@@ -13,7 +12,6 @@
               </div>
             </div>
           {{/if}}
-				</div>
 			</body>
 	</main>
 </template>
@@ -37,7 +35,7 @@
 </template>
 
 <template name='look-back-tab'>
-    Look Back
+    <a href="{{pathFor 'lookback'}}">Look Back</a>
 </template>
 
 <template name='journal-tab'>

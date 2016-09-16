@@ -4,6 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Entries } from '../../collections/entries.js';
 
 import './journal.html'
+import './nouislider.js'
 
 Template.journal.helpers({
 	entries() {
