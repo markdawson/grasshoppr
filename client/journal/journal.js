@@ -24,7 +24,7 @@ Template.journal.helpers({
 	},
 	conversation_partners(){
 		const instance = Template.instance();
-		return $('.chips').material_chip('data');;
+		return $('.chips-placeholder').material_chip('data');
 	},
     how_was_today_reactive() {
     	const instance = Template.instance();
@@ -34,6 +34,10 @@ Template.journal.helpers({
     	const instance = Template.instance();
       	return instance.state.get('focus'); 
     },
+    thought_of_the_day(){
+    	const instance = Template.instance();
+    	return instance.state.get('thought');
+    }
 });
 
 Template.journal.onCreated(function journalOnCreated() {
@@ -73,6 +77,12 @@ Template.journal.events({
     },
     'change .focus'(event, instance) {
        instance.state.set('focus', event.target.value); 
+    },
+    'change .chips'(event, instance){
+    	instance.state.set('conversation_partners',$('.chips-placeholder').material_chip('data'));
+    },
+    'keyup #textarea1':function(event, instance) {
+		instance.state.set('thought', event.target.value); 
     },
 
 
