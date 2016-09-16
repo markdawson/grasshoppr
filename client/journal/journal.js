@@ -9,6 +9,14 @@ Template.journal.helpers({
 	entries() {
 		return Entries.find({});
 	},
+    how_was_today() {
+    	const instance = Template.instance();
+       	return instance.state.get('how_was_today'); 
+    },
+    focus() {
+    	const instance = Template.instance();
+      	return instance.state.get('focus'); 
+    },
 });
 
 Template.journal.onCreated(function journalOnCreated() {
@@ -38,5 +46,11 @@ Template.journal.events({
 		}
 
 		Meteor.call('entries.insert', entry);
-	}
+	},
+    'change .how_was_today'(event, instance) {
+       instance.state.set('how_was_today', event.target.value); 
+    },
+    'change .focus'(event, instance) {
+       instance.state.set('focus', event.target.value); 
+    },
 });
