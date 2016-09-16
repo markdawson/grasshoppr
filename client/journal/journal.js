@@ -6,13 +6,25 @@ import { Entries } from '../../collections/entries.js';
 import './journal.html'
 import './nouislider.js'
 
-
+var friends;
 Template.journal.helpers({
 	entries() {
 		return Entries.find({});
 	},
+	date(){
+		let day = new Date();
+		let tday = day.getDay();
+		let date = day.getDate();
+		let month = day.getMonth() + 1;
+        let year = day.getFullYear();
+		return (month + "/"+date+", "+year);
+	},
 	people() {
 		return People.find({});
+	},
+	conversation_partners(){
+		const instance = Template.instance();
+		return $('.chips').material_chip('data');;
 	},
     how_was_today_reactive() {
     	const instance = Template.instance();
@@ -75,6 +87,7 @@ Template.journal.onRendered(function() {
 	    secondaryPlaceholder: 'Person',
  	 });
 	$('.chips').on('chip.add', function(e, chip){
+
   });
 	$('input.autocomplete').autocomplete({
     	data: {

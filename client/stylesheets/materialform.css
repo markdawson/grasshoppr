@@ -86,3 +86,14 @@ input[type=range]::-ms-thumb {
   border-radius: 50%;
   background: green;
 }
+.upperright{
+  float: right;
+  width: 25%;
+  margin-right: 2em;
+}
+.container{
+  width: 80%;
+}
+.convos{
+  
+}
