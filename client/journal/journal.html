@@ -1,13 +1,13 @@
 <template name='journal'>
     <div class="row">
-      <form class="col s12">
+      <form class="col s12 new-entry">
         <div></div>
         <div class="row">
           How was today?
         </div>
         <div class="row">
           <p class="range-field">
-            <input type="range" id="test5" min="0" max="10" />
+            <input name="how_was_today" type="range" id="test5" min="0" max="10" />
           </p>
         </div>
         <div class="row">
@@ -15,7 +15,7 @@
         </div>
         <div class="row">
           <p class="range-field">
-            <input type="range" id="test5" min="0" max="10" />
+            <input name="focus" type="range" id="test5" min="0" max="10" />
           </p>
         </div>
 
@@ -27,14 +27,25 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
+            <textarea name="thought" id="textarea1" class="materialize-textarea" length="120"></textarea>
             <label for="textarea1">Textarea</label>
           </div>
         </div>
-        </form>
+
+      <div class="right">
+            <a class="btn-floating btn-large waves-effect waves-light red darken-1 right-alight">   <button type="submit" class="material-button"><i class="material-icons">done</i></button>
+            </a>
+      </div> 
+
+      </form>
     </div>
 
-    <div class="right">
-      <a class="btn-floating btn-large waves-effect waves-light red darken-1 right-alight"><i class="material-icons">done</i></a>
-   </div> 
+    {{#each entries}}
+      <hr>
+      {{ how_was_today }}
+      {{ focus }}
+      {{ thought }}
+    {{/each}}
+
+    
 </template>

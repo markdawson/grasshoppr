@@ -3,7 +3,6 @@
 		{{> navbar }}
 			<body>
 				<div class="container">
-					<h1>Hello :)</h1>
 					{{> Template.dynamic template=content}}
 				</div>
 			</body>
@@ -17,13 +16,20 @@
       <a href="#" class="brand-logo center">Grasshoppr</a>
       <ul id="nav-mobile" class="left hide-on-small-and-down">
         <li><a href="#">{{> loginButtons}}</a></li>
-        <li><a href="#">Look Back</a></li>
       </ul>
       <ul id="nav=mobile" class="right hide-on-small-and-down">
-        <li><a href="#">Journal</a></li>
+        <li><a href="#">{{> Template.dynamic template=page}}</a></li>
       </ul>
     </div>
   </nav>
 </div>
+</template>
+
+<template name='look-back-tab'>
+    Look Back
+</template>
+
+<template name='journal-tab'>
+    Journal
 </template>
 

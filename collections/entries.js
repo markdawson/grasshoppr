@@ -1,9 +1,30 @@
-Entries = new Mongo.Collection('entries');
+import { check } from 'meteor/check';
+
+export const Entries = new Mongo.Collection('entries');
 
 Entries.allow({
 	insert: function(userId, doc) {
-		return !!userId;
+		return !!this.userId;
 	}
+});
+
+Meteor.methods({
+	'entries.insert'(entry) {
+		check(entry, Object);
+
+		// Make sure the user is logged in before inserting
+		if (! this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+
+		Entries.insert({
+			how_was_today: entry.how_was_today,
+			focus: entry.focus,
+			thought: entry.thought,
+			createdAt: new Date(),
+			createdBy: this.userId
+		});
+	},
 });
 
 EntrySchema = new SimpleSchema({
@@ -14,7 +35,8 @@ EntrySchema = new SimpleSchema({
 		type: Number
 	},
 	people: {
-		type: String
+		type: String,
+		optional: true
 	},
 	thought: {
 		type: String
