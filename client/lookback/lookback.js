@@ -40,7 +40,7 @@ Template.lookback.onRendered(function() {
  //        chart.draw(data, options);
  //      }
 
- 	// recentEntries = function(){ return Entries.find().sort{' ';}()
+ 	
 
   	google.charts.load('current', {'packages':['line']});
   	google.charts.setOnLoadCallback(drawChart);
@@ -48,7 +48,7 @@ Template.lookback.onRendered(function() {
     function drawChart() {
 
       let data = new google.visualization.DataTable();
-      data.addColumn('date', 'Day');
+      data.addColumn('number', 'Day');
       data.addColumn('number', 'How was today?');
       data.addColumn('number', 'How focused were you today?');
 

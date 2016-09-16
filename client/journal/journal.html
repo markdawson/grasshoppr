@@ -4,7 +4,7 @@
       <form class="col s8 new-entry">
      
         <div class="row">
-          <input type="date" class="datepicker" name="date" initial="{{today}}">
+          <input type="date" class="datepicker" name="date">
         </div>
 
         <div class="row">
@@ -42,6 +42,10 @@
           <textarea name="thought" id="textarea1" class="materialize-textarea" length="140"></textarea>
         </div>
 
+        <div class="right">
+            <a class="btn-floating btn-large waves-effect waves-light red darken-1 right-alight">   <button name="submit" type="submit" class="material-button"><i class="material-icons">done</i></button>
+            </a>
+     </div> 
 
       </form>
   
@@ -65,9 +69,11 @@
       </div>
 
     </div>
+   
 
     {{#each entries}}
       <hr>
+      {{ date }}
       {{ how_was_today }};
       {{ focus }};
       {{#each people}}
@@ -75,7 +81,6 @@
       {{/each}}
       |{{ thought }}
     {{/each}}
-
   </div>
 
 </template>

@@ -11,16 +11,8 @@ Template.journal.helpers({
 	entries() {
 		return Entries.find({});
 	},
-	date(){
-		let day = new Date();
-		let tday = day.getDay();
-		let date = day.getDate();
-		let month = day.getMonth() + 1;
-        let year = day.getFullYear();
-		return (month + "/"+date+", "+year);
-	},
 	people() {
-		return People.find({});
+		// return People.find({});
 	},
 	conversation_partners(){
 		const instance = Template.instance();
@@ -46,7 +38,6 @@ Template.journal.onCreated(function journalOnCreated() {
 
 Template.journal.events({
 	'submit .new-entry'(event) {
-
 		// Prevent default browser form submit
 		event.preventDefault();
 
@@ -60,6 +51,7 @@ Template.journal.events({
 		const people = $('.chips-placeholder').material_chip('data');
 
 		entry = {
+			date: date,
 			how_was_today: how_was_today,
 			focus: focus,
 			thought: thought,
@@ -85,7 +77,6 @@ Template.journal.events({
     'keyup #textarea1':function(event, instance) {
 		instance.state.set('thought', event.target.value); 
     },
-
 
 });
 
