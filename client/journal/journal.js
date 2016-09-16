@@ -52,6 +52,7 @@ Template.journal.events({
 
 		// Get value from form element
 		const target = event.target;
+		const date = target.date;
 		const how_was_today = target.how_was_today.value;
 		const focus = target.focus.value;
 		// const people = target.how_was_today.value;
@@ -108,4 +109,10 @@ Template.journal.onRendered(function() {
 	$(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter();
   });
+	let $input = $('.datepicker').pickadate({
+	    selectMonths: true, // Creates a dropdown to control month
+	    selectYears: 5, // Creates a dropdown of 15 years to control year
+  	});
+  	let picker = $input.pickadate('picker');
+  	picker.set('select', new Date());
 });
