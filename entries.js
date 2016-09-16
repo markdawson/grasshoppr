@@ -32,7 +32,7 @@ EntrySchema = new SimpleSchema({
 		type: String,
 		autoValue: function() {
 			return this.userId
-		}
+		},
 		autoform: {
 			type: "hidden"
 		}
