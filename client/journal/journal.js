@@ -20,7 +20,7 @@ Template.journal.helpers({
 	// },
 	conversation_partners(){
 		const instance = Template.instance();
-		return $('.chips-placeholder').material_chip('data');
+		return instance.state.get('conversation_partners');
 	},
     how_was_today_reactive() {
     	const instance = Template.instance();
@@ -73,7 +73,7 @@ Template.journal.events({
     'change .focus'(event, instance) {
        instance.state.set('focus', event.target.value); 
     },
-    'change .chips'(event, instance){
+    'keyup .chips'(event, instance){
     	instance.state.set('conversation_partners',$('.chips-placeholder').material_chip('data'));
     },
     'keyup #textarea1':function(event, instance) {

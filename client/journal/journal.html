@@ -54,15 +54,15 @@
         <div class="row">
           <div class="card">
             <div class="card-content white-text">
-              <span class="card-title">{{ selectedDate }}</span>
-              <p> How was today? <p style="float:right">{{how_was_today_reactive}}</p></p>
-              <p>How focused were you? <p style="float:right">{{focus_reactive}}</p></p>
+              <span class="card-title">{{date}}</span>
+               <p> How was today? <p style="float:right; color:#ffab40">{{how_was_today_reactive}}</p></p>
+              <p>How focused were you? <p style="float:right; color:#ffab40">{{focus_reactive}}</p></p>
               <p class="convos">Conversations with:</p>
-                {{#each conversation_partners}}
-                  {{ tag }}
-                {{/each}}
+                <p style="color:#ffab40">{{#each conversation_partners}}
+                  {{ tag }},
+                {{/each}}</p>
               <p class="convos">Thought of the day:</p>
-                <p class="card-thoughts">{{thought_of_the_day}}</p>
+                <p class="card-thoughts" style="color:#ffab40">{{thought_of_the_day}}</p>
               <div class="card-action">
                 <a href="#">Submit</a>
               </div>
@@ -70,6 +70,7 @@
           </div>
         </div>
       </div>
+
 
     </div>
    
