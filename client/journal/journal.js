@@ -49,7 +49,9 @@ Template.journal.events({
 		Meteor.call('entries.insert', entry);
 	},
     'change .how_was_today'(event, instance) {
-       instance.state.set('how_was_today', event.target.value); 
+    	const today = event.target.value;
+       instance.state.set('how_was_today', today); 
+       $('.container').addClass('amber accent-' + today.toString());
     },
     'change .focus'(event, instance) {
        instance.state.set('focus', event.target.value); 
@@ -59,12 +61,15 @@ Template.journal.events({
 });
 
 Template.journal.onRendered(function() {
-	// $('.container').css('background-color', 'blue');
+	const instance = Template.instance();
+	const today = instance.state.get('how_was_today');
+	//$('.container').addClass('amber accent-' );
 	$('.chips-placeholder').material_chip({
 	    placeholder: '+Person',
 	    secondaryPlaceholder: 'Person',
  	 });
 	$('.chips').on('chip.add', function(e, chip){
+
   });
 
 });
