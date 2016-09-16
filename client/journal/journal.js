@@ -3,8 +3,8 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 
 import { Entries } from '../../collections/entries.js';
 
-import './journal.html'
-import './nouislider.js'
+import './journal.html';
+import './nouislider.js';
 
 Template.journal.helpers({
 	entries() {
@@ -70,7 +70,21 @@ Template.journal.onRendered(function() {
 	    secondaryPlaceholder: 'Person',
  	 });
 	$('.chips').on('chip.add', function(e, chip){
-
   });
+
+	var slider = document.getElementById('test5');
+	noUiSlider.create(slider, {
+	start: [20, 80],
+	connect: true,
+	step: 1,
+	range: {
+	'min': 0,
+	'max': 100
+	},
+	format: wNumb({
+	decimals: 0
+	})
+  });
+       
 
 });
