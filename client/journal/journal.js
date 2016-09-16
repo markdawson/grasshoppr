@@ -6,9 +6,13 @@ import { Entries } from '../../collections/entries.js';
 import './journal.html'
 import './nouislider.js'
 
+
 Template.journal.helpers({
 	entries() {
 		return Entries.find({});
+	},
+	people() {
+		return People.find({});
 	},
     how_was_today_reactive() {
     	const instance = Template.instance();
@@ -51,8 +55,9 @@ Template.journal.events({
 	},
     'change .how_was_today'(event, instance) {
     	const today = event.target.value;
-       instance.state.set('how_was_today', today); 
-       $('.container').addClass('amber accent-' + today.toString());
+        instance.state.set('how_was_today', today);
+        $('.container null').removeClass(this.className.split(' ').pop());
+        $('.container').addClass('accent-' + today.toString());
     },
     'change .focus'(event, instance) {
        instance.state.set('focus', event.target.value); 
@@ -70,7 +75,14 @@ Template.journal.onRendered(function() {
 	    secondaryPlaceholder: 'Person',
  	 });
 	$('.chips').on('chip.add', function(e, chip){
-
   });
-
+	$('input.autocomplete').autocomplete({
+    	data: {
+    		'Jack McGrath':null,
+    		'Mark Dawson':null
+    	}
+  });
+	$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();
+  });
 });

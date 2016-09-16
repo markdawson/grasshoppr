@@ -1,36 +1,41 @@
 <template name='journal'>
-  <div class="container">
+  <div class="container null">
     <div class="row">
       <form class="col s12 new-entry">
-        <div></div>
+     
         <div class="row">
-          How was today? {{how_was_today_reactive}}
+          How was today?
+          <p style="float:right">{{how_was_today_reactive}}</p>
         </div>
+
         <div class="row">
           <p class="range-field how_was_today">
             <input name="how_was_today" type="range" id="test5" min="0" max="10" />
           </p>
         </div>
         <div class="row">
-          How focused were you today? {{focus_reactive}}
-        </div>
-        <div class="row">
-          <p class="range-field focus">
-            <input name="focus" type="range" id="test5" min="0" max="10" />
-          </p>
-        </div>
-
-        <div class="row">
-          Who did you have good convserations with today?
-        </div>
-
-  		<div class="chips chips-placeholder"></div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea name="thought" id="textarea1" class="materialize-textarea" length="120"></textarea>
-            <label for="textarea1">Textarea</label>
+            How focused were you today?
+            <p style="float:right">{{focus_reactive}}</p>
           </div>
+
+          <div class="row">
+            <p class="range-field focus">
+              <input name="focus" type="range" id="test5" min="0" max="10" />
+            </p>
+          </div>
+  
+
+        <div class="row">
+          <p class="title">Who did you have good conversations with today?</p>
+          <div class="chips chips-placeholder"></div>
+
+        </div>
+
+        <div class="row">
+            Thought of the Day:
+          
+           
+          <textarea name="thought" id="textarea1" class="materialize-textarea" length="140"></textarea>
         </div>
 
       <div class="right">
