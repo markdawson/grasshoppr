@@ -9,11 +9,11 @@ Template.journal.helpers({
 	entries() {
 		return Entries.find({});
 	},
-    how_was_today() {
+    how_was_today_reactive() {
     	const instance = Template.instance();
        	return instance.state.get('how_was_today'); 
     },
-    focus() {
+    focus_reactive() {
     	const instance = Template.instance();
       	return instance.state.get('focus'); 
     },
@@ -26,7 +26,6 @@ Template.journal.onCreated(function journalOnCreated() {
 Template.journal.events({
 	'submit .new-entry'(event) {
 
-		alert('something happend');
 		// Prevent default browser form submit
 		event.preventDefault();
 
@@ -36,11 +35,13 @@ Template.journal.events({
 		const focus = target.focus.value;
 		// const people = target.how_was_today.value;
 		const thought = target.thought.value;
+		const people = $('.chips-placeholder').material_chip('data');
 
 		entry = {
 			how_was_today: how_was_today,
 			focus: focus,
 			thought: thought,
+			people: people,
 			createdAt: new Date(),
 			createdBy: this.userId
 		}
@@ -53,4 +54,17 @@ Template.journal.events({
     'change .focus'(event, instance) {
        instance.state.set('focus', event.target.value); 
     },
+
+
+});
+
+Template.journal.onRendered(function() {
+	// $('.container').css('background-color', 'blue');
+	$('.chips-placeholder').material_chip({
+	    placeholder: '+Person',
+	    secondaryPlaceholder: 'Person',
+ 	 });
+	$('.chips').on('chip.add', function(e, chip){
+  });
+
 });

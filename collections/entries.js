@@ -21,44 +21,46 @@ Meteor.methods({
 			how_was_today: entry.how_was_today,
 			focus: entry.focus,
 			thought: entry.thought,
+			people: entry.people,
 			createdAt: new Date(),
 			createdBy: this.userId
 		});
 	},
 });
 
-EntrySchema = new SimpleSchema({
-	how_was_today: {
-		type: Number
-	},
-	focus: {
-		type: Number
-	},
-	people: {
-		type: String,
-		optional: true
-	},
-	thought: {
-		type: String
-	},
-	createdAt: {
-		type: Date,
-		autoValue: function() {
-			return new Date()
-		},
-		autoform: {
-			type: "hidden"
-		}
-	},
-	createdBy: {
-		type: String,
-		autoValue: function() {
-			return this.userId
-		},
-		autoform: {
-			type: "hidden"
-		}
-	}
-});
+// EntrySchema = new SimpleSchema({
+// 	how_was_today: {
+// 		type: Number
+// 	},
+// 	focus: {
+// 		type: Number
+// 	},
+// 	people: {
+// 		type: [Object],
+// 		optional: true
+// 	},
+// 	thought: {
+// 		type: String
+// 	},
+// 	createdAt: {
+// 		type: Date,
+// 		autoValue: function() {
+// 			return new Date()
+// 		},
+// 		autoform: {
+// 			type: "hidden"
+// 		}
+// 	},
+// 	createdBy:
+// 	 {
+// 		type: String,
+// 		autoValue: function() {
+// 			return this.userId
+// 		},
+// 		autoform: {
+// 			type: "hidden"
+// 		}
+// 	}
+// });
 
-Entries.attachSchema(EntrySchema);
+// Entries.attachSchema(EntrySchema);
