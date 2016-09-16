@@ -1,7 +1,7 @@
 <template name='journal'>
-  <div class="container null">
+  <div class="container">
     <div class="row">
-      <form class="col s12 new-entry">
+      <form class="col s8 new-entry">
      
         <div class="row">
           How was today?
@@ -38,12 +38,28 @@
           <textarea name="thought" id="textarea1" class="materialize-textarea" length="140"></textarea>
         </div>
 
-      <div class="right">
-            <a class="btn-floating btn-large waves-effect waves-light red darken-1 right-alight">   <button type="submit" class="material-button"><i class="material-icons">done</i></button>
-            </a>
-      </div> 
 
       </form>
+  
+       <div class="upperright">
+        <div class="row">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{date}}</span>
+              <p> How was today? <p style="float:right">{{how_was_today_reactive}}</p></p>
+              <p>How focused were you? <p style="float:right">{{focus_reactive}}</p></p>
+              <p class="convos">Conversations with:</p>
+                {{conversation_partners}}
+              <p class="convos">Thought of the day:</p>
+
+              <div class="card-action">
+                <a href="#">Submit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     {{#each entries}}
@@ -57,4 +73,5 @@
     {{/each}}
 
   </div>
+
 </template>

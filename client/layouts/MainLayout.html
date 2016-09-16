@@ -2,8 +2,10 @@
 	<main>
 		{{> navbar }}
 			<body>
-          {{#if currentUser}} 
-					 {{> Template.dynamic template=content}}
+          {{#if currentUser}}
+            <div class="container"> 
+					   {{> Template.dynamic template=content}}
+           </div>
           {{else}}
             <br><br><br>
             <div class="card amber">
