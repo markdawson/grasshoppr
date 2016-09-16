@@ -11,9 +11,13 @@ Template.journal.helpers({
 	entries() {
 		return Entries.find({});
 	},
-	people() {
-		// return People.find({});
+	selectedDate() {
+		const instance = Template.instance();
+		return instance.state.get('selectedDate')
 	},
+	// people() {
+	// 	// return People.find({});
+	// },
 	conversation_partners(){
 		const instance = Template.instance();
 		return $('.chips-placeholder').material_chip('data');
@@ -43,7 +47,7 @@ Template.journal.events({
 
 		// Get value from form element
 		const target = event.target;
-		const date = target.date;
+		const selectedDate = target.selectedDate.value;
 		const how_was_today = target.how_was_today.value;
 		const focus = target.focus.value;
 		// const people = target.how_was_today.value;
@@ -51,7 +55,7 @@ Template.journal.events({
 		const people = $('.chips-placeholder').material_chip('data');
 
 		entry = {
-			date: date,
+			selectedDate: selectedDate,
 			how_was_today: how_was_today,
 			focus: focus,
 			thought: thought,
@@ -65,8 +69,6 @@ Template.journal.events({
     'change .how_was_today'(event, instance) {
     	const today = event.target.value;
         instance.state.set('how_was_today', today);
-        $('.container null').removeClass(this.className.split(' ').pop());
-        $('.container').addClass('accent-' + today.toString());
     },
     'change .focus'(event, instance) {
        instance.state.set('focus', event.target.value); 
@@ -89,7 +91,6 @@ Template.journal.onRendered(function() {
 	    secondaryPlaceholder: 'Person',
  	 });
 	$('.chips').on('chip.add', function(e, chip){
-
   });
 	$('input.autocomplete').autocomplete({
     	data: {
