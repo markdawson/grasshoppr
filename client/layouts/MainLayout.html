@@ -26,7 +26,7 @@
       </ul>
       {{#if currentUser}} 
         <ul id="nav=mobile" class="right hide-on-small-and-down">
-          <li><a href="#">{{> Template.dynamic template=page}}</a></li>
+          <li>{{> Template.dynamic template=page}}</li>
         </ul>
       {{/if}}
     </div>
@@ -39,6 +39,6 @@
 </template>
 
 <template name='journal-tab'>
-    Journal
+    <a href="{{pathFor 'journal'}}">Journal</a>
 </template>
 
