@@ -65,6 +65,7 @@ Template.journal.events({
 		}
 
 		Meteor.call('entries.insert', entry);
+		FlowRouter.go('lookback');
 	},
     'change .how_was_today'(event, instance) {
     	const today = event.target.value;
