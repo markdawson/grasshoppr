@@ -128,8 +128,13 @@ Template.lookback.onRendered(function() {
         function selectHandler() {
 		    let selectedItem = chart.getSelection()[0];
 		    if (selectedItem) {
-		      //let value = data.getValue(selectedItem.row, selectedItem.column);
-		       $('#modal1').openModal();
+		      let value = data.getValue(selectedItem.row, selectedItem.column);
+		      if ( value === 8) {
+		      	$('#modal1').openModal();
+		      }
+		    }
+		    else {
+		    	$('#modal2').openModal();
 		    }
 		  }
 		google.visualization.events.addListener(chart, 'select', selectHandler);
