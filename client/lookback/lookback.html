@@ -2,9 +2,6 @@
 <div class="container">
 	<br>
 	<h1>Look Back</h1>
-	{{#with selectedEntry}}
-		{{focus}}
-	{{/with}}
 	<div class="row">
 	    <div class="col s11" id="curve_chart" style="width: 900px; height: 500px"></div>
 	    <div class="col s1 valign-wrapper" style="float: right">
@@ -21,7 +18,9 @@
               <p>How focused were you?</p> <p style="float:center; color:#5C4033">{{focus}}</p>
               <p class="convos">Conversations?</p>
                 <p style="color:#5C4033">
-                Jovonnie, Jack, Frank
+                {{#each people}}
+                	{{tag}}{{#if ! people.length-1 == @index}},{{/if}}
+                {{/each}}
                 </p>
               <p class="convos">Thought of the day?</p>
               <p class="card-thoughts" style="color:#5C4033">{{thought}}</p>
