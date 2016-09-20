@@ -1,0 +1,112 @@
+<template name="lookbackgrid">
+<div class="container">
+	<br>
+	<div class="row">
+		<div class="valign-wrapper" style="float: left">
+			<a class="valign btn-floating btn-large waves-effect waves-light green" href="{{pathFor 'lookback'}}">
+				<i class="material-icons">fast_rewind</i>
+			</a>
+		</div>
+	    <div class="valign-wrapper" style="float: right">
+		   <a class="valign btn-floating btn-large waves-effect waves-light green">
+		   		<i class="material-icons">fast_forward</i>
+		   	</a>
+		</div>
+		<div class="center-align">
+			<h1>Cards</h1>
+		</div>
+    </div>
+
+    <div class="row">
+    	{{#each user_entries}}
+	    	<div class="col m3 s8 offset-s2">
+				<div class="card blue-grey darken-1">
+		            <div class="card-content white-text">
+		            	<span class="card-title">{{selectedDate}}</span>
+			        	<p> How was today?</p> 
+			        	<p style="float:center; color:#5C4033">
+			        		{{how_was_today}}
+			        	</p>
+			        	<p>How focused were you?</p> 
+			        	<p style="float:center; color:#5C4033">
+			        		{{focus}}
+			        	</p>
+			        	<p class="convos">Conversations?</p>
+			            <p style="color:#5C4033">
+				            {{#each people}}
+				            	{{tag}},
+				            {{/each}}
+			            </p>
+			        	<p class="convos">Thought of the day?</p>
+			        	<p class="card-thoughts" style="color:#5C4033">
+			        		{{thought}}
+			        	</p>
+			        </div>
+			    </div>
+	    	</div>
+    	{{/each}}
+    </div>
+
+<!--     <div class="row">
+
+    	<div class="col m3 s8 offset-s2">
+    		<div class="card blue-grey darken-1">
+	            <div class="card-content white-text">
+	              <span class="card-title">Card Title</span>
+	              <p>I am a very simple card. I am good at containing small bits of information.
+	              I am convenient because I require little markup to use effectively.</p>
+	            </div>
+	            <div class="card-action">
+	              <a href="#">This is a link</a>
+	              <a href="#">This is a link</a>
+	            </div>
+         	</div>
+    	</div>
+
+    	<div class="col m3 s8 offset-s2">
+    		<div class="card blue-grey darken-1">
+	            <div class="card-content white-text">
+	              <span class="card-title">Card Title</span>
+	              <p>I am a very simple card. I am good at containing small bits of information.
+	              I am convenient because I require little markup to use effectively.</p>
+	            </div>
+	            <div class="card-action">
+	              <a href="#">This is a link</a>
+	              <a href="#">This is a link</a>
+	            </div>
+         	</div>
+    	</div>
+
+    	<div class="col m3 s8 offset-s2">
+    		<div class="card blue-grey darken-1">
+	            <div class="card-content white-text">
+	              <span class="card-title">Card Title</span>
+	              <p>I am a very simple card. I am good at containing small bits of information.
+	              I am convenient because I require little markup to use effectively.</p>
+	            </div>
+	            <div class="card-action">
+	              <a href="#">This is a link</a>
+	              <a href="#">This is a link</a>
+	            </div>
+         	</div>
+    	</div>
+
+		<div class="col m3 s8 offset-s2">
+    		<div class="card blue-grey darken-1">
+	            <div class="card-content white-text">
+	              <span class="card-title">Card Title</span>
+	              <p>I am a very simple card. I am good at containing small bits of information.
+	              I am convenient because I require little markup to use effectively.</p>
+	            </div>
+	            <div class="card-action">
+	              <a href="#">This is a link</a>
+	              <a href="#">This is a link</a>
+	            </div>
+         	</div>
+    	</div>
+
+    </div> -->
+
+</div>
+	 
+</template>

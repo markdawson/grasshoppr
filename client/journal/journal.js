@@ -6,7 +6,6 @@ import { Entries } from '../../collections/entries.js';
 import './journal.html'
 import './nouislider.js'
 
-var friends;
 Template.journal.helpers({
 	entries() {
 		return Entries.find({});
@@ -38,6 +37,9 @@ Template.journal.helpers({
 
 Template.journal.onCreated(function journalOnCreated() {
 	this.state = new ReactiveDict();
+
+	const instance = Template.instance();
+	instance.state.set('selectedDate', new Date()); 
 });
 
 Template.journal.events({
@@ -55,7 +57,7 @@ Template.journal.events({
 		const people = $('.chips-placeholder').material_chip('data');
 
 		entry = {
-			selectedDate: new Date(selectedDate),
+			selectedDate: selectedDate,
 			selectedDateParse: Date.parse(selectedDate),
 			how_was_today: Number(how_was_today),
 			focus: Number(focus),
@@ -73,6 +75,9 @@ Template.journal.events({
 		Meteor.call('entries.insert', entry);
 		FlowRouter.go('lookback');
 	},
+	'change .selectedDate'(event, instance) {
+       instance.state.set('selectedDate', event.target.value); 
+    },
     'change .how_was_today'(event, instance) {
     	const today = event.target.value;
         instance.state.set('how_was_today', today);

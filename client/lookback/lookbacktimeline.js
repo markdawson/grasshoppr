@@ -4,22 +4,23 @@ import { Tracker } from 'meteor/tracker';
 
 import { Entries } from '../../collections/entries.js';
 
-import './lookback.html';
+// import the template to manipulate DOM
+import './lookbacktimeline.html';
 
-Template.lookback.onCreated(function lookbackOnCreated() {
+Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('entries');
   user_entries = Entries.find({}, {sort: { selectedDate: -1 }} ).fetch();
 });
 
-Template.lookback.onRendered(function() {
+Template.lookbacktimeline.onRendered(function() {
   // alert(user_entries);
   const instance = Template.instance();
 	$.getScript("https://www.gstatic.com/charts/loader.js", function() {
     let user_data = [];
     for(let entry of user_entries) {
 
-      let data_entry = [entry.selectedDate, entry.how_was_today, entry.focus];
+      let data_entry = [new Date(entry.selectedDateParse), entry.how_was_today, entry.focus];
       user_data.push(data_entry);
       //console.log(Date.parse(entry.selectedDate));
     }
@@ -52,27 +53,21 @@ Template.lookback.onRendered(function() {
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         function selectHandler() {
-        let columnindex = 0;
-		    let selectedItem = chart.getSelection()[0];
-		    if (selectedItem) {
-		      let value = data.getValue(selectedItem.row, columnindex);
-          // alert(new Date(value));
-          // alert(Date.parse(value));
-          // console.log(new Date(value));
-          // console.log(value);
-          // console.log(Date.parse(value));
-          let selectedEntry = Entries.findOne({selectedDateParse: Date.parse(value)});//.fetch();
-          console.log(selectedEntry);
-          console.log(...selectedEntry);
-          //alert(...selectedEntry);
-          instance.state.set('selectedEntry', selectedEntry);
-          instance.state.set('focus', selectedEntry.focus);
-          
-          $('#modal1').openModal();
+          let columnindex = 0;
+  		    let selectedItem = chart.getSelection()[0];
+  		    if (selectedItem) {
+  		      let value = data.getValue(selectedItem.row, columnindex);
+            let selectedEntry = Entries.findOne({selectedDateParse: Date.parse(value)});
+            console.log(selectedEntry);
+            console.log(...selectedEntry);
+            //alert(...selectedEntry);
+            instance.state.set('selectedEntry', selectedEntry);
+            
+            $('#modal1').openModal();
           }
         }
 		    
-		  google.visualization.events.addListener(chart, 'select', selectHandler);
+  		  google.visualization.events.addListener(chart, 'select', selectHandler);
         chart.draw(data, options);
       }
 
@@ -80,15 +75,9 @@ Template.lookback.onRendered(function() {
 
 });
 
-Template.lookback.helpers({
+Template.lookbacktimeline.helpers({
     selectedEntry() {
       const instance = Template.instance();
       return instance.state.get('selectedEntry');
-    },
-    focus() {
-      const instance = Template.instance();
-      return instance.state.get('focus');
     }
-
 });
-

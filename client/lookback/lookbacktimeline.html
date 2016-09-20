@@ -1,0 +1,49 @@
+<template name="lookbacktimeline">
+<div class="container">
+	<br>
+	<div class="row">
+	    <div class="valign-wrapper" style="float: right">
+		   <a href="{{pathFor 'lookbackgrid'}}" class="valign btn-floating btn-large waves-effect waves-light green">
+		   		<i class="material-icons">fast_forward</i>
+		   	</a>
+		</div>
+		<div class="center-align">
+			<h1>Timeline</h1>
+		</div>
+    </div>
+
+	<div class="col s11" id="curve_chart" style="width: 900px; height: 500px"></div>
+
+
+      <div id="modal1" class="modal">
+	    <div class="modal-content">
+	    	{{#with selectedEntry}}
+	        	<h4>September 16, 2016</h4>
+	        	<p> How was today?</p> 
+	        	<p style="float:center; color:#5C4033">
+	        		{{how_was_today}}
+	        	</p>
+	        	<p>How focused were you?</p> 
+	        	<p style="float:center; color:#5C4033">
+	        		{{focus}}
+	        	</p>
+	        	<p class="convos">Conversations?</p>
+	            <p style="color:#5C4033">
+		            {{#each people}}
+		            	{{tag}},
+		            {{/each}}
+	            </p>
+	        	<p class="convos">Thought of the day?</p>
+	        	<p class="card-thoughts" style="color:#5C4033">
+	        		{{thought}}
+	        	</p>
+            {{/with}}
+		    <div class="modal-footer">
+		      <a class=" modal-action modal-close waves-effect btn-flat">Done</a>
+		    </div>
+	  	</div>
+	 </div>
+
+</div>
+	 
+</template>
