@@ -75,8 +75,8 @@ Template.journal.events({
 		Meteor.call('entries.insert', entry);
 		FlowRouter.go('lookback');
 	},
-	'change .selectedDate'(event, instance) {
-       instance.state.set('selectedDate', event.target.value); 
+	'change .datepicker'(event, instance) {
+    	instance.state.set('selectedDate', event.target.value); 
     },
     'change .how_was_today'(event, instance) {
     	const today = event.target.value;
@@ -86,7 +86,7 @@ Template.journal.events({
        instance.state.set('focus', event.target.value); 
     },
     'keyup .chips'(event, instance){
-    	instance.state.set('conversation_partners',$('.chips-placeholder').material_chip('data'));
+    	instance.state.set('conversation_partners', $('.chips-placeholder').material_chip('data'));
     },
     'keyup #textarea1':function(event, instance) {
 		instance.state.set('thought', event.target.value); 
@@ -100,7 +100,7 @@ Template.journal.onRendered(function() {
 	//$('.container').addClass('amber accent-' );
 	$('.chips-placeholder').material_chip({
 	    placeholder: '+Person',
-	    secondaryPlaceholder: 'Person',
+	    secondaryPlaceholder: 'Press enter after each',
  	 });
 	$('.chips').on('chip.add', function(e, chip){
   });
