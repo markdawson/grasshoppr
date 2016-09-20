@@ -19,6 +19,7 @@ Meteor.methods({
 
 		Entries.insert({
 			selectedDate: entry.selectedDate,
+			selectedDateParse: entry.selectedDateParse,
 			how_was_today: entry.how_was_today,
 			focus: entry.focus,
 			thought: entry.thought,

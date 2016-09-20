@@ -56,6 +56,7 @@ Template.journal.events({
 
 		entry = {
 			selectedDate: new Date(selectedDate),
+			selectedDateParse: Date.parse(selectedDate),
 			how_was_today: Number(how_was_today),
 			focus: Number(focus),
 			thought: thought,

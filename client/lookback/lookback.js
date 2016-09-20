@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Tracker } from 'meteor/tracker';
 
 import { Entries } from '../../collections/entries.js';
 
@@ -13,6 +14,7 @@ Template.lookback.onCreated(function lookbackOnCreated() {
 
 Template.lookback.onRendered(function() {
   // alert(user_entries);
+  const instance = Template.instance();
 	$.getScript("https://www.gstatic.com/charts/loader.js", function() {
     let user_data = [];
     for(let entry of user_entries) {
@@ -53,10 +55,19 @@ Template.lookback.onRendered(function() {
         let columnindex = 0;
 		    let selectedItem = chart.getSelection()[0];
 		    if (selectedItem) {
-          let words = "Something's been clicked";
 		      let value = data.getValue(selectedItem.row, columnindex);
-          let selectedEntry = Entries.find({selectedDate: value});
+          // alert(new Date(value));
+          // alert(Date.parse(value));
+          // console.log(new Date(value));
+          // console.log(value);
+          // console.log(Date.parse(value));
+          let selectedEntry = Entries.findOne({selectedDateParse: Date.parse(value)});//.fetch();
+          console.log(selectedEntry);
           console.log(...selectedEntry);
+          //alert(...selectedEntry);
+          instance.state.set('selectedEntry', selectedEntry);
+          instance.state.set('focus', selectedEntry.focus);
+          
           $('#modal1').openModal();
           }
         }
@@ -70,7 +81,14 @@ Template.lookback.onRendered(function() {
 });
 
 Template.lookback.helpers({
-  thought() {
-    return words;
-  }
+    selectedEntry() {
+      const instance = Template.instance();
+      return instance.state.get('selectedEntry');
+    },
+    focus() {
+      const instance = Template.instance();
+      return instance.state.get('focus');
+    }
+
 });
+
