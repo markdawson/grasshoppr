@@ -27,6 +27,15 @@ Meteor.methods({
 			createdBy: this.userId
 		});
 	},
+
+	'entries.delete_date'(date_to_delete) {
+		// Make sure the user is logged in before inserting
+		if (! this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+
+		Entries.remove({selectedDate: date_to_delete});
+	},
 });
 
 // EntrySchema = new SimpleSchema({

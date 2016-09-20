@@ -55,13 +55,18 @@ Template.journal.events({
 		const people = $('.chips-placeholder').material_chip('data');
 
 		entry = {
-			selectedDate: selectedDate,
-			how_was_today: how_was_today,
-			focus: focus,
+			selectedDate: new Date(selectedDate),
+			how_was_today: Number(how_was_today),
+			focus: Number(focus),
 			thought: thought,
 			people: people,
 			createdAt: new Date(),
 			createdBy: this.userId
+		}
+
+		if (Entries.findOne({selectedDate: entry.selectedDate})) {
+			alert('Are you sure you want to overwtite this daily entry?');
+			Meteor.call('entries.delete_date', entry.selectedDate);
 		}
 
 		Meteor.call('entries.insert', entry);

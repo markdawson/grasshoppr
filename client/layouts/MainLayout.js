@@ -1,4 +1,4 @@
-Template.MainLayout.onRendered({
+Template.mainLayout.onRendered({
   // $('.chips').material_chip();
   // $('.chips-initial').material_chip({
   //   data: [{
