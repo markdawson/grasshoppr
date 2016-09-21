@@ -33,9 +33,13 @@ Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
       data.addColumn('number', 'How was today?');
       data.addColumn('number', 'How focused were you today?');
 
+      // User had enough data to make a chart
       if (user_data.length > 2) {
         data.addRows(user_data);
       }
+
+      // User does not have enough data to make a chart
+      // So we make one for them
       else {
         Materialize.toast('This is sample data until you add your first 3 entries :)', 7000, 'rounded green');
         setTimeout( () => {
@@ -68,17 +72,45 @@ Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
       let chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
       function selectHandler() {
-        let columnindex = 0;
         let selectedItem = chart.getSelection()[0];
         if (selectedItem) {
-          let value = data.getValue(selectedItem.row, columnindex);
-          let selectedEntry = Entries.findOne({selectedDateParse: Date.parse(value)});
-          instance.state.set('selectedEntry', selectedEntry);
-          
-          $('#modal1').openModal();
+          let columnindex_of_dateparse = 0;
+          let value = data.getValue(selectedItem.row, columnindex_of_dateparse);
+
+          // If user has enough data for the chart display real data
+          if (user_data.length > 2) {
+            let selectedEntry = Entries.findOne({selectedDateParse: Date.parse(value)});
+            instance.state.set('selectedEntry', selectedEntry);
+          }
+          else {
+            let selectedEntry = {
+              selectedDate: String(data.getValue(selectedItem.row, columnindex_of_dateparse)).substr(0, 15),
+              how_was_today: data.getValue(selectedItem.row, 1),
+              focus: data.getValue(selectedItem.row, 2),
+              people: [
+                {
+                  tag: 'Frank',
+                },
+                {
+                  tag: 'Maggie',
+                },                
+                {
+                  tag: 'Andy',
+                },
+                {
+                  tag: 'Jovonnie',
+                },
+                {
+                  tag: 'Jack',
+                },              
+              ],
+              thought: "I really enjoyed bike riding today! I found a cool new spot in Carrboro!"
+            };
+            instance.state.set('selectedEntry', selectedEntry);
+          }
         }
-      }
-        
+          $('#modal1').openModal();
+      } 
         google.visualization.events.addListener(chart, 'select', selectHandler);
         chart.draw(data, options);
       }
