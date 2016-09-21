@@ -1,0 +1,27 @@
+<template name="lookbackhisto">
+<div class="container">
+	<br>
+	<div class="row">
+		<div class="valign-wrapper" style="float: left">
+			<a class="valign btn-floating btn-large waves-effect waves-light green" href="{{pathFor 'lookbackgrid'}}">
+				<i class="material-icons">fast_rewind</i>
+			</a>
+		</div>
+	    <div class="valign-wrapper" style="float: right">
+		   <a class="valign btn-floating btn-large waves-effect waves-light green" href="{{pathFor ''}}">
+		   		<i class="material-icons">fast_forward</i>
+		   	</a>
+		</div>
+		<div class="center-align">
+			<h1>People each day</h1>
+		</div>
+    </div>
+
+
+    <div id="people_histogram" style="width: 900px; height: 500px;"></div>
+
+
+
+</div>
+	 
+</template>

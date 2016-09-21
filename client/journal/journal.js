@@ -99,8 +99,8 @@ Template.journal.onRendered(function() {
 	const today = instance.state.get('how_was_today');
 	//$('.container').addClass('amber accent-' );
 	$('.chips-placeholder').material_chip({
-	    placeholder: '+Person',
-	    secondaryPlaceholder: 'Press enter after each',
+	    placeholder: '+ Person',
+	    secondaryPlaceholder: 'Press enter on each name',
  	 });
 	$('.chips').on('chip.add', function(e, chip){
   });

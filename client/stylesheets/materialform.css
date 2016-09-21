@@ -9,7 +9,13 @@
     border-bottom: 0px;
   }*/
 
-
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  color: #43a047;
+  bottom: 10%;
+  left:7%;  
+}
 
   /* label color */
    .input-field label {

@@ -8,37 +8,37 @@
 			</a>
 		</div>
 	    <div class="valign-wrapper" style="float: right">
-		   <a class="valign btn-floating btn-large waves-effect waves-light green">
+		   <a class="valign btn-floating btn-large waves-effect waves-light green" href="{{pathFor 'lookbackhisto'}}">
 		   		<i class="material-icons">fast_forward</i>
 		   	</a>
 		</div>
 		<div class="center-align">
-			<h1>Cards</h1>
+			<h1>Daily entries</h1>
 		</div>
     </div>
 
     <div class="row">
     	{{#each user_entries}}
 	    	<div class="col m3 s8 offset-s2">
-				<div class="card blue-grey darken-1">
+				<div class="card">
 		            <div class="card-content white-text">
-		            	<span class="card-title">{{selectedDate}}</span>
+		            	<span class="card-title white-text">{{selectedDate}}</span>
 			        	<p> How was today?</p> 
-			        	<p style="float:center; color:#5C4033">
+			        	<p style="float:center; color:#ffab40">
 			        		{{how_was_today}}
 			        	</p>
 			        	<p>How focused were you?</p> 
-			        	<p style="float:center; color:#5C4033">
+			        	<p style="float:center; color:#ffab40">
 			        		{{focus}}
 			        	</p>
 			        	<p class="convos">Conversations?</p>
-			            <p style="color:#5C4033">
+			            <p style="color:#ffab40">
 				            {{#each people}}
 				            	{{tag}},
 				            {{/each}}
 			            </p>
 			        	<p class="convos">Thought of the day?</p>
-			        	<p class="card-thoughts" style="color:#5C4033">
+			        	<p class="card-thoughts" style="color:#ffab40">
 			        		{{thought}}
 			        	</p>
 			        </div>
