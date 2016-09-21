@@ -85,7 +85,10 @@ Template.journal.events({
         instance.state.set('how_was_today', today);
     },
     'change .focus'(event, instance) {
-       instance.state.set('focus', event.target.value); 
+       instance.state.set('focus', event.target.value);
+       setTimeout( () => {
+        Materialize.toast("When typing people, hit enter after each person's name", 7000, 'rounded green');
+      }, 1000 ); 
     },
     'keyup .chips'(event, instance){
     	instance.state.set('conversation_partners', $('.chips-placeholder').material_chip('data'));
