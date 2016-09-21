@@ -67,13 +67,15 @@ Template.journal.events({
 			createdBy: this.userId
 		}
 
-		if (Entries.findOne({selectedDate: entry.selectedDate})) {
-			alert('Are you sure you want to overwtite this daily entry?');
-			Meteor.call('entries.delete_date', entry.selectedDate);
+		if (!Entries.findOne({selectedDate: entry.selectedDate})) {
+			Meteor.call('entries.insert', entry);
+			FlowRouter.go('lookback');
+		} 
+		else if (confirm('Are you sure you want to overwtite this daily entry?')){
+				Meteor.call('entries.delete_date', entry.selectedDate);
+				Meteor.call('entries.insert', entry);
+				FlowRouter.go('lookback');
 		}
-
-		Meteor.call('entries.insert', entry);
-		FlowRouter.go('lookback');
 	},
 	'change .datepicker'(event, instance) {
     	instance.state.set('selectedDate', event.target.value); 

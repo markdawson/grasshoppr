@@ -123,3 +123,11 @@ input[type=range]::-ms-thumb {
   word-wrap: break-word;
   color: #efefef;
 }
+
+input[type=range]::-webkit-slider-thumb {
+    background: goldenrod;
+}
+button:focus {
+    outline: none;
+    background-color: green;
+}
