@@ -27,13 +27,31 @@ Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      let data = new google.visualization.DataTable();
 
+      let data = new google.visualization.DataTable();
       data.addColumn('date', 'September');
       data.addColumn('number', 'How was today?');
       data.addColumn('number', 'How focused were you today?');
 
-      data.addRows(user_data);
+      if (user_data.length > 2) {
+        data.addRows(user_data);
+      }
+      else {
+        Materialize.toast('This is sample data until you add your first 3 entries :)', 7000, 'rounded green');
+        setTimeout( () => {
+          Materialize.toast('Trying clicking on points on the timeline!', 5000, 'rounded green');
+        }, 5000 );
+
+        data.addRows([
+          [new Date("12 September, 2016"), 5, 8],
+          [new Date("13 September, 2016"), 6, 7],
+          [new Date("14 September, 2016"), 7, 5],
+          [new Date("15 September, 2016"), 8, 8],
+          [new Date("16 September, 2016"), 9, 3],
+          [new Date("17 September, 2016"), 7, 5],
+          [new Date("18 September, 2016"), 6, 7],
+        ]);
+      }
 
       let options = {
         title: 'Journal Over Time',
@@ -90,7 +108,5 @@ Template.lookbacktimeline.helpers({
 
 Template.lookbacktimeline.onRendered(function() {
   // Materialize.toast(message, displayLength, className, completeCallback);
-  setTimeout( () => {
-    Materialize.toast('Trying clicking on points on the timeline!', 7000, 'rounded green');
-  }, 5000 ); // 4000 is the duration of the toast
+   // 4000 is the duration of the toast
 });
