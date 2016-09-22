@@ -14,8 +14,8 @@ Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
   Meteor.subscribe('entries');
   Meteor.subscribe('people');
   //
-  
-  user_entries = Entries.find({}, {sort: { selectedDate: -1 }} ).fetch();
+
+  user_entries = Entries.find({}, {sort: { selectedDateParse: 1 }} ).fetch();
 
   const instance = Template.instance();
   $.getScript("https://www.gstatic.com/charts/loader.js", function() {
