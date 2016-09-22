@@ -10,7 +10,11 @@ import './lookbacktimeline.html';
 
 Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
   this.state = new ReactiveDict();
+  // I don't think this subscriptions are necessary since they are in the onRendered function?
   Meteor.subscribe('entries');
+  Meteor.subscribe('people');
+  //
+  
   user_entries = Entries.find({}, {sort: { selectedDate: -1 }} ).fetch();
 
   const instance = Template.instance();
@@ -18,8 +22,6 @@ Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
 
     // Prepare data for chart
     let timeline_entries;
-    console.log(user_entries);
-    console.log(user_entries.length > 2);
     if (user_entries.length > 2) {
       timeline_entries = user_entries;
     }
@@ -70,7 +72,6 @@ Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
         if (selectedItem) {
           let columnindex_of_date = 0;
           let current_date = data.getValue(selectedItem.row, columnindex_of_date);
-          console.log(user_entries.length);
           let selectedEntry;
           if (user_entries.length > 2) {
             selectedEntry = Entries.findOne({selectedDateParse: Date.parse(current_date)});
@@ -97,16 +98,7 @@ Template.lookbacktimeline.onCreated(function lookbackOnCreated() {
 });
 
 Template.lookbacktimeline.events({
-  // 'keyup'(event) {
-  //   alert('something happened');
-  //   console.log(event);
-  //   if(event.keyCode == 37) { // left
-  //     FlowRouter.go('lookbackgrid');
-  //   }
-  //   else if(event.keyCode == 39) { // right
-  //     FlowRouter.go('lookbackgrid');
-  //   }
-  // }
+  // TODO add clicking between visualizations
 });
 
 Template.lookbacktimeline.helpers({
@@ -117,6 +109,7 @@ Template.lookbacktimeline.helpers({
 });
 
 Template.lookbacktimeline.onRendered(function() {
-  // Materialize.toast(message, displayLength, className, completeCallback);
-   // 4000 is the duration of the toast
+  Meteor.subscribe('entries');
+  Meteor.subscribe('people');
+
 });

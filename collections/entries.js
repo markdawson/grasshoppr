@@ -1,6 +1,7 @@
 import { check } from 'meteor/check';
 
 export const Entries = new Mongo.Collection('entries');
+export const People = new Mongo.Collection('people');
 
 Entries.allow({
 	insert: function(userId, doc) {
@@ -27,6 +28,30 @@ Meteor.methods({
 			createdAt: new Date(),
 			createdBy: this.userId
 		});
+
+
+		for(let name of entry.people) {
+			person = People.find({
+				owner: this.userId,
+				name: name.tag
+			});
+
+			// If person is not in the db created them
+			if (!person.name) {
+				let others = entry.people.map(p => p.tag);
+				others = others.filter(p => p !== name.tag);
+				People.insert({
+					owner: this.userId,
+					createdAt: new Date(),
+					name: name.tag,
+					associatedPeople: others,
+					days: entry.selectedDate,
+					focus: [entry.focus],
+					how_was_today: [entry.how_was_today]
+				});
+			}
+		}
+
 	},
 
 	'entries.delete_date'(date_to_delete) {
