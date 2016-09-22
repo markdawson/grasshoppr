@@ -9,6 +9,12 @@
     border-bottom: 0px;
   }*/
 
+@media screen and (min-width: 600px) {
+    .sidenav-button {
+        display: none !important;
+    }
+}
+
 #toast-container {
   top: auto !important;
   right: auto !important;

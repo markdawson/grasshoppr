@@ -103,6 +103,7 @@ Template.journal.events({
 });
 
 Template.journal.onRendered(function() {
+	$(".button-collapse").sideNav();
 	const instance = Template.instance();
 	//$('.container').addClass('amber accent-' );
 	$('.chips-placeholder').material_chip({
