@@ -10,9 +10,10 @@
           {{else}}
             <br><br><br>
             <div class="container">
-              <div class="card amber">
+              <div class="card amber login-card">
                 <div class="card-content">
                   <span class="card-title">Sign up to start journaling!</span>
+                  <a href="#" data-activates="slide-out" class="button-collapse show-on-large sidenav-button "><h2 style="color: brown">Sign In</h2></a>
                 </div>
               </div>
             </div>
@@ -26,9 +27,8 @@
   <nav>
     <div class="nav-wrapper green darken-1">
       <a href="#" class="brand-logo center">Grasshoppr</a>
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="sidenav-button material-icons">menu</i></a>
+      <a href="#" data-activates="slide-out" class="button-collapse  show-on-large "><i class="sidenav-button material-icons">menu</i></a>
       <ul id="nav-mobile" class="left hide-on-small-and-down">
-        <li><a href="#">{{> loginButtons}}</a></li>
       </ul>
       {{#if currentUser}} 
         <ul id="nav=mobile" class="right hide-on-small-and-down">
@@ -47,8 +47,8 @@
       <a href="#!name"><span class="white-text name">John Doe</span></a>
       <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
     </div></li>
-    <li><a href="#!">{{> loginButtons}}</a></li>
-    <li><a href="#!">Second Link</a></li>
+    <li><a href="#">{{> loginButtons}}</a></li>
+    <li><a href="#">Second Link</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Subheader</a></li>
     <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>

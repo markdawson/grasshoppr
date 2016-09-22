@@ -101,7 +101,9 @@ Template.journal.events({
     },
 
 });
-
+Template.journal.onCreated(function(){
+	$(".button-collapse").sideNav();
+})
 Template.journal.onRendered(function() {
 	$(".button-collapse").sideNav();
 	const instance = Template.instance();
@@ -119,6 +121,7 @@ Template.journal.onRendered(function() {
     	}
   });
 	$(document).ready(function() {
+
     $('input#input_text, textarea#textarea1').characterCounter();
   });
 	let $input = $('.datepicker').pickadate({

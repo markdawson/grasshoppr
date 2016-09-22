@@ -9,12 +9,14 @@
     border-bottom: 0px;
   }*/
 
-@media screen and (min-width: 600px) {
-    .sidenav-button {
+@media screen and (max-width: 600px) {
+    .upperright {
         display: none !important;
     }
 }
-
+.login-card{
+  max-width: 450px;
+}
 #toast-container {
   top: auto !important;
   right: auto !important;
