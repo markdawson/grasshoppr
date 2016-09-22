@@ -31,29 +31,71 @@ Meteor.methods({
 
 
 		for(let name of entry.people) {
-			person = People.find({
+			person = People.findOne({
 				owner: this.userId,
 				name: name.tag
 			});
 
+			// Set up associated people dictionary
+			let others = entry.people.filter(p => p.tag !== name.tag); // don't associate a person to themselves
+			others = others.map(p => p.tag); //get the name out of the tag object
+
+			console.log("others is")
+			console.log(others);
+			//console.log(person.name);
+
 			// If person is not in the db created them
-			if (!person.name) {
-				let others = entry.people.filter(p => p.tag !== name.tag);
+			if (!person) {
+				// Make a new dictionary for the new person entry	
 				let others_map = new Map();
-				others.map(p => others_map.set(p.tag, 1));
+				others.map(p => others_map.set(p, 1)); // since this is a new entry, everyone has been observed once
 				console.log(others_map);
+
 				People.insert({
 					owner: this.userId,
 					name: name.tag,
 					createdAt: new Date(),
 					associatedPeople: others_map,
-					days: entry.selectedDate,
+					days: [entry.selectedDate],
 					focus: [entry.focus],
 					how_was_today: [entry.how_was_today]
 				});
 			}
-			/*
+			// If person is in the db update that entry
 			else {
+				// Update associated people dictionary
+				// let existing_map = new Map()
+				//person.associatedPeople.map(p => existing_map.set(p, ));
+				// console.log(person.associatedPeople);
+				// console.log(typeof person.associatedPeople);
+				// let name = "Jake";
+				// person.associatedPeople[name] = person.associatedPeople[name] + 1;
+				// console.log(person.associatedPeople[name]);
+
+
+				for (let p of others) {
+					myMap = new Map()
+					console.log();
+					console.log(p);
+					console.log(person.associatedPeople[p]);
+					console.log();
+					myMap[p] = person.associatedPeople[p] ? person.associatedPeople[p] + 1 : 1;
+					person.associatedPeople[p] = person.associatedPeople[p] ? person.associatedPeople[p] + 1 : 1;
+				}
+
+				// People.update(
+				// 	// Query
+				// 	{
+				// 		owner: this.userId,
+				// 		name: name.tag
+				// 	},
+				// 	// Update
+				// 	{
+				// 		$unset: {
+				// 			associatedPeople: "",
+				// 		},
+				// });
+
 				People.update(
 					// Query
 					{
@@ -62,10 +104,18 @@ Meteor.methods({
 					},
 					// Update
 					{
-						associatedPeople
-					})
+						$set: {
+							associatedPeople: person.associatedPeople,
+						},
+						$push: {
+							days: entry.selectedDate,
+							focus: entry.focus,
+							how_was_today: entry.how_was_today
+						}	
+				});
+
+				console.log('update complete');
 			}
-			*/
 		}
 
 	},
