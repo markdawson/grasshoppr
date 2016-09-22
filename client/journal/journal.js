@@ -27,7 +27,7 @@ Template.journal.helpers({
     },
     focus_reactive() {
     	const instance = Template.instance();
-      	return instance.state.get('focus'); 
+      	return instance.state.get('focus_score'); 
     },
     thought_of_the_day(){
     	const instance = Template.instance();
@@ -71,7 +71,7 @@ Template.journal.events({
 			Meteor.call('entries.insert', entry);
 			FlowRouter.go('lookback');
 		} 
-		else if (confirm('Are you sure you want to overwtite this daily entry?')){
+		else if (confirm('Are you sure you want to overwrite this daily entry?')){
 				Meteor.call('entries.delete_date', entry.selectedDate);
 				Meteor.call('entries.insert', entry);
 				FlowRouter.go('lookback');
@@ -81,14 +81,17 @@ Template.journal.events({
     	instance.state.set('selectedDate', event.target.value); 
     },
     'change .how_was_today'(event, instance) {
-    	const today = event.target.value;
-        instance.state.set('how_was_today', today);
+        instance.state.set('how_was_today', event.target.value);
     },
     'change .focus'(event, instance) {
-       instance.state.set('focus', event.target.value);
-       setTimeout( () => {
-        Materialize.toast("When typing people, hit enter after each person's name", 7000, 'rounded green');
-      }, 1000 ); 
+    	const focus_score = event.target.value;
+    	// if statement here to patch bug where unentered chip data would overwrite focus.
+    	if (focus_score.length <= 2) {
+    		instance.state.set('focus_score', event.target.value);
+    	};
+		setTimeout( () => {
+		Materialize.toast("When typing people, hit enter after each person's name", 7000, 'rounded green');
+		}, 1000 ); 
     },
     'keyup .chips'(event, instance){
     	instance.state.set('conversation_partners', $('.chips-placeholder').material_chip('data'));
@@ -101,7 +104,6 @@ Template.journal.events({
 
 Template.journal.onRendered(function() {
 	const instance = Template.instance();
-	const today = instance.state.get('how_was_today');
 	//$('.container').addClass('amber accent-' );
 	$('.chips-placeholder').material_chip({
 	    placeholder: '+ Person',
