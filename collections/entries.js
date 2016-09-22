@@ -38,18 +38,34 @@ Meteor.methods({
 
 			// If person is not in the db created them
 			if (!person.name) {
-				let others = entry.people.map(p => p.tag);
-				others = others.filter(p => p !== name.tag);
+				let others = entry.people.filter(p => p.tag !== name.tag);
+				let others_map = new Map();
+				others.map(p => others_map.set(p.tag, 1));
+				console.log(others_map);
 				People.insert({
 					owner: this.userId,
-					createdAt: new Date(),
 					name: name.tag,
-					associatedPeople: others,
+					createdAt: new Date(),
+					associatedPeople: others_map,
 					days: entry.selectedDate,
 					focus: [entry.focus],
 					how_was_today: [entry.how_was_today]
 				});
 			}
+			/*
+			else {
+				People.update(
+					// Query
+					{
+						owner: this.userId,
+						name: name.tag
+					},
+					// Update
+					{
+						associatedPeople
+					})
+			}
+			*/
 		}
 
 	},
