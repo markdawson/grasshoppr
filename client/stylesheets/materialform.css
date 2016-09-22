@@ -9,9 +9,9 @@
     border-bottom: 0px;
   }*/
 
-@media screen and (min-width: 0px) {
-    .sidenav-button {
-        display: inline !important;
+@media screen and (max-width: 600px) {
+    .upperright {
+        display: none !important;
     }
 }
 .login-card{
