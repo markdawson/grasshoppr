@@ -5,7 +5,7 @@ import { Tracker } from 'meteor/tracker';
 import { Entries } from '../../collections/entries.js';
 
 // import the template to manipulate DOM
-import './lookbackhisto.html';
+import './lookbackpeople.html';
 
 Template.lookbackhisto.onCreated(function histoOnCreated() { 
 	
