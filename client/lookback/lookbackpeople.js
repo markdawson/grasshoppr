@@ -7,7 +7,7 @@ import { Entries } from '../../collections/entries.js';
 // import the template to manipulate DOM
 import './lookbackpeople.html';
 
-Template.lookbackhisto.onCreated(function histoOnCreated() { 
+Template.lookbackpeople.onCreated(function peopleOnCreated() { 
 	
 
 });
