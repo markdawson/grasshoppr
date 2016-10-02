@@ -9,9 +9,10 @@ ways!
 
 ## Upcoming Features:
 - Mobile optimization (in progess)
-- people visualization (in progress) 
-- search cards
+- people visualization (in progress)
+- improved log-in
 - data filter timeline
+- search cards
 - autocomplete names
 - color coding cards
 - custom fields
@@ -20,3 +21,4 @@ ways!
 - Commas after names
 - Color scheme not great
 - Patch on chips reactive data
+- Limit the number of cards shown (then add Ajax when scrolling)

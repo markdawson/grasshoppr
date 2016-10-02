@@ -55,46 +55,24 @@ Meteor.methods({
 					owner: this.userId,
 					name: name.tag,
 					createdAt: new Date(),
-					associatedPeople: others_map,
+					associated_people: others_map,
 					days: [entry.selectedDate],
 					focus: [entry.focus],
-					how_was_today: [entry.how_was_today]
+					how_was_today: [entry.how_was_today],
+					last_updated: entry.selectedDateParse,
 				});
 			}
 			// If person is in the db update that entry
 			else {
-				// Update associated people dictionary
-				// let existing_map = new Map()
-				//person.associatedPeople.map(p => existing_map.set(p, ));
-				// console.log(person.associatedPeople);
-				// console.log(typeof person.associatedPeople);
-				// let name = "Jake";
-				// person.associatedPeople[name] = person.associatedPeople[name] + 1;
-				// console.log(person.associatedPeople[name]);
-
-
 				for (let p of others) {
 					myMap = new Map()
-					console.log();
-					console.log(p);
-					console.log(person.associatedPeople[p]);
-					console.log();
-					myMap[p] = person.associatedPeople[p] ? person.associatedPeople[p] + 1 : 1;
-					person.associatedPeople[p] = person.associatedPeople[p] ? person.associatedPeople[p] + 1 : 1;
+					// console.log();
+					// console.log(p);
+					// console.log(person.associated_people[p]);
+					// console.log();
+					myMap[p] = person.associated_people[p] ? person.associated_people[p] + 1 : 1;
+					person.associated_people[p] = person.associated_people[p] ? person.associated_people[p] + 1 : 1;
 				}
-
-				// People.update(
-				// 	// Query
-				// 	{
-				// 		owner: this.userId,
-				// 		name: name.tag
-				// 	},
-				// 	// Update
-				// 	{
-				// 		$unset: {
-				// 			associatedPeople: "",
-				// 		},
-				// });
 
 				People.update(
 					// Query
@@ -105,7 +83,8 @@ Meteor.methods({
 					// Update
 					{
 						$set: {
-							associatedPeople: person.associatedPeople,
+							associated_people: person.associated_people,
+							last_updated: entry.selectedDateParse,
 						},
 						$push: {
 							days: entry.selectedDate,

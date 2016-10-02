@@ -13,7 +13,7 @@ Template.lookbackgrid.onCreated(function lookbackOnCreated() {
   Meteor.subscribe('entries');
   db_data = Entries.find({}, {sort: { selectedDateParse: -1 }} ).fetch();
   user_entries = db_data.length > 2 ? db_data : fixture_data;
-  console.log(user_entries);
+  // console.log(user_entries);
 });
 
 Template.lookbackgrid.helpers({
