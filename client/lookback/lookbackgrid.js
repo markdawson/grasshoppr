@@ -11,6 +11,7 @@ import './lookbackgrid.html';
 Template.lookbackgrid.onCreated(function lookbackOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('entries');
+  Meteor.subscribe('people');
   db_data = Entries.find({}, {sort: { selectedDateParse: -1 }} ).fetch();
   user_entries = db_data.length > 2 ? db_data : fixture_data;
   // console.log(user_entries);

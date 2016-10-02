@@ -12,6 +12,7 @@ import './lookbackpeople.html';
 
 Template.lookbackpeople.onCreated(function lookbackOnCreated() {
 	Meteor.subscribe('entries');
+	Meteor.subscribe('people');
 	// TODO limit the number of person cards here
 	db_data = People.find({}, {sort: { last_updated: -1 }} ).fetch();
 	person_cards = [];
