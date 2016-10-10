@@ -36,9 +36,9 @@ Meteor.methods({
 				name: name.tag
 			});
 
-			// Set up associated people dictionary
+			// Set up a list of people
 			let others = entry.people.filter(p => p.tag !== name.tag); // don't associate a person to themselves
-			others = others.map(p => p.tag); //get the name out of the tag object
+
 
 			console.log("others is")
 			console.log(others);
@@ -46,16 +46,13 @@ Meteor.methods({
 
 			// If person is not in the db created them
 			if (!person) {
-				// Make a new dictionary for the new person entry	
-				let others_map = new Map();
-				others.map(p => others_map.set(p, 1)); // since this is a new entry, everyone has been observed once
-				console.log(others_map);
-
+				others = others.map(p => [p.tag,1]); // since this is a new entry, everyone has been observed once
+				console.log(others);
 				People.insert({
 					owner: this.userId,
 					name: name.tag,
 					createdAt: new Date(),
-					associated_people: others_map,
+					associated_people: others,
 					days: [entry.selectedDate],
 					focus: [entry.focus],
 					how_was_today: [entry.how_was_today],
@@ -65,13 +62,23 @@ Meteor.methods({
 			// If person is in the db update that entry
 			else {
 				for (let p of others) {
-					myMap = new Map()
-					// console.log();
-					// console.log(p);
-					// console.log(person.associated_people[p]);
-					// console.log();
-					myMap[p] = person.associated_people[p] ? person.associated_people[p] + 1 : 1;
+					//myMap = new Map()
+					//myMap[p] = person.associated_people[p] ? person.associated_people[p] + 1 : 1;
 					person.associated_people[p] = person.associated_people[p] ? person.associated_people[p] + 1 : 1;
+
+					let found;
+					for (let name of person.associated_people){
+						console.log("name is", name, "and p is ", p);
+						found = false;
+						if (name[0] === p.tag){
+							name[1] += 1;
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						person.associated_people.push([p.tag, 1]);
+					}
 				}
 
 				People.update(
