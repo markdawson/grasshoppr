@@ -14,7 +14,7 @@ Meteor.methods({
 		check(entry, Object);
 
 		// Make sure the user is logged in before inserting
-		if (! this.userId) {
+		if (!this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
 
@@ -62,10 +62,6 @@ Meteor.methods({
 			// If person is in the db update that entry
 			else {
 				for (let p of others) {
-					//myMap = new Map()
-					//myMap[p] = person.associated_people[p] ? person.associated_people[p] + 1 : 1;
-					person.associated_people[p] = person.associated_people[p] ? person.associated_people[p] + 1 : 1;
-
 					let found;
 					for (let name of person.associated_people){
 						console.log("name is", name, "and p is ", p);

@@ -54,11 +54,13 @@ Template.lookbackpeople.onCreated(function lookbackOnCreated() {
 			n--;
 			}
 
-		//console.log("top people for ", p, " are ", top_people);
-		console.log(Date(p.last_updated))
+		// console.log("top people for ", p, " are ", top_people);
+		// console.log( Date);
+		let today = new Date();
+		const diff = new Date(today - p.last_updated);
 		let person = {
 			name: p.name,
-			days_since: Date(p.last_updated - new Date.parse()), // add days since using last_updated
+			days_since: diff.getDate() - 1, // add days since using last_updated
 			associated_people: top_people,
 			how_was_today_average: 1, // add how was today average
 			focus_average: 1, // add focus average
