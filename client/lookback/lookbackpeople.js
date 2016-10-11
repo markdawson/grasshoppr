@@ -14,6 +14,7 @@ Template.lookbackpeople.onCreated(function lookbackOnCreated() {
 	Meteor.subscribe('entries');
 	Meteor.subscribe('people');
 
+	/* helper functions */
 	function getMax(people_array) {
 		let i = 0;
 		let max_entry = ['',0];
@@ -30,6 +31,15 @@ Template.lookbackpeople.onCreated(function lookbackOnCreated() {
 		people_array.splice(max_index, 1);
 
 		return [max_entry, people_array];
+	}
+
+	function avg(array) {
+		let sum = 0;
+		for (let e of array) {
+			sum += e;
+		}
+		let result = sum / array.length;
+		return result;
 	}
 
 	// TODO limit the number of person cards here
@@ -62,8 +72,8 @@ Template.lookbackpeople.onCreated(function lookbackOnCreated() {
 			name: p.name,
 			days_since: diff.getDate() - 1, // add days since using last_updated
 			associated_people: top_people,
-			how_was_today_average: 1, // add how was today average
-			focus_average: 1, // add focus average
+			how_was_today_average: Math.round(avg(p.how_was_today) * 100) / 100, // add how was today average
+			focus_average: Math.round(avg(p.focus) * 100) / 100, // add focus average
 		};
 		// add new entry
 		person_cards.push(person);
