@@ -21,25 +21,32 @@
 						<div class="card">
 				            <div class="card-content white-text">
 				            	<span class="card-title white-text">{{name}}</span>
-					        	<p>Days since last conversation</p> 
-					        	<p style="float:center; color:#ffab40">
-					        		{{days_since}}
+				            	{{#if days_since}}
+					        		<p>It's been <span style="color:#ffab40">{{days_since}} </span> days since your last good conversation with {{name}}.</p>
+					        	{{else}}
+					        		<p>You talked to {{name}} today!</p> 
+					        	{{/if}}
+
+					        	<br>
+					        	<p>You gave days with {{name}} a 
+						        	<span style="float:center; color:#ffab40">
+						        		{{how_was_today_average}}
+						        	</span>
+						        with a focus of 
+						        	<span style="float:center; color:#ffab40">
+						        		{{focus_average}}
+						        	</span>
+						        on average.
 					        	</p>
-					        	<p>How focused were you?</p> 
-					        	<p style="float:center; color:#ffab40">
-					        		{{focus}}
-					        	</p>
-					        	<p class="convos">Conversations?</p>
-					            <p style="color:#ffab40">
-					            	{{ associated_people}}
-						            {{#each people}}
-						            	{{tag}},
-						            {{/each}}
+					        	<br>
+					        	<p class="convos">When you talk to {{name}} you also talk to
+						            <span style="color:#ffab40">
+						            	{{ associated_people}}
+							            {{#each people}}
+							            	{{people}},
+							            {{/each}}
+						            </span>.
 					            </p>
-					        	<p class="convos">Thought of the day?</p>
-					        	<p class="card-thoughts" style="color:#ffab40">
-					        		{{thought}}
-					        	</p>
 					        </div>
 					    </div>
 			    	</div>
